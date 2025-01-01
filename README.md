@@ -1,5 +1,7 @@
 # 25-winter-algorithm
 
+[![Notion](https://img.shields.io/badge/Notion-%23000000.svg?style=for-the-badge&logo=notion&logoColor=white)](https://www.notion.so/25-Farm-System-161b4ba0516b804e881bc876add71c91)
+
 | 이름  | 트랙              | 사용 언어            | GitHub                              | 전공                       | 학번       |
 |-------|------------------|----------------------|-----------------------------------------|---------------------------|------------|
 | 이소은 | 보안/네트워크(열매) | Java                 | [saokiritoni](https://github.com/saokiritoni)       | 경영정보학과              | 2021111535 |
