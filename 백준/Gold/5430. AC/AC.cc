@@ -38,7 +38,7 @@ int main(void){
                 if(dq.empty()){
                     cout << "error\n";
                     eFlag = true;
-                    break; // 현재 테스트 케이스 처리 중단
+                    break; // error시 반복문 cmd interpret 종료
                 }
                 if(mode == 1){
                     dq.pop_front();
