@@ -32,7 +32,7 @@ int main(void){
 
     //출력 코드
     cout << "<";
-    for (size_t i = 0; i < n; ++i) {
+    for (int i = 0; i < n; ++i) {
         cout << vec[i];
         if (i != n - 1) {
             cout << ", ";
