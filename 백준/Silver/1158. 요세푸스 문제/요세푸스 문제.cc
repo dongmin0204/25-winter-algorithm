@@ -1,48 +1,46 @@
-#include <iostream>
-#include <queue>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-vector<int> josephus(int N, int K) {
-    queue<int> circle;
-    vector<int> result;
 
-    // Initialize the queue with people from 1 to N
-    for (int i = 1; i <= N; ++i) {
-        circle.push(i);
-    }
+int main(void){
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-    // Simulate the Josephus problem
-    while (!circle.empty()) {
-        // Rotate the queue K-1 times
-        for (int i = 1; i < K; ++i) {
-            circle.push(circle.front());
-            circle.pop();
+    
+    int n,k;
+    cin >> n >> k;
+
+    vector<int>vec(n);
+    queue<int> q;
+
+    for(int i = 0; i < n; i++){
+        q.push(i+1);
+    } //요세푸스 수 삽입
+
+    while (!q.empty()) { //q가 빌때까지
+
+        //k번째가 queue.front()이러면 k-1만큰 pop하고 push
+        for (int i = 0; i < k-1; i++) {
+            q.push(q.front());
+            q.pop();
         }
-        // Remove the K-th person
-        result.push_back(circle.front());
-        circle.pop();
+
+        vec.push_back(q.front()); //이제 k번째 사람을 답안지(vec)에 옮긴다.
+        q.pop();
     }
 
-    return result;
-}
 
-int main() {
-    int N, K;
-    cin >> N >> K;
-
-    vector<int> result = josephus(N, K);
-
-    // Print the result in the desired format
+    //출력 코드
     cout << "<";
-    for (size_t i = 0; i < result.size(); ++i) {
-        cout << result[i];
-        if (i != result.size() - 1) {
+    for (size_t i = 0; i < n; ++i) {
+        cout << vec[i];
+        if (i != n - 1) {
             cout << ", ";
         }
     }
     cout << ">";
+
+
 
     return 0;
 }
