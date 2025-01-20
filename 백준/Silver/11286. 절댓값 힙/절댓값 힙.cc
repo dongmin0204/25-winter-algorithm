@@ -4,14 +4,12 @@ using namespace std;
 struct Data {
     int absValue;
     int value;
-};
-
-struct Compare {
-    bool operator()(const Data& a, const Data& b) {
-        if (a.absValue == b.absValue) {
-            return a.value > b.value;
+    
+    bool operator<(const Data& other) const {
+        if (absValue == other.absValue) {
+            return value > other.value;
         }
-        return a.absValue > b.absValue;
+        return absValue > other.absValue;
     }
 };
 
@@ -23,7 +21,7 @@ int main()
     
     int N; 
     cin >> N;
-    priority_queue<Data, vector<Data>, Compare> PQ;
+    priority_queue<Data> PQ;
     
     for(int i = 0; i < N; i++) {
         int num;
