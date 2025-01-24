@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int sum_str(const string& s) {
+int sum_str(const string& s) { //조건 2를 위한 함수
     int sum = 0;
     for(auto c : s){
         if(isdigit(c)){
@@ -19,11 +19,11 @@ struct Cmp {
         else{
             int sum_value = sum_str(value);
             int sum_other = sum_str(other);
-            if(sum_value != sum_other){
+            if(sum_value != sum_other){ //조건 2
                 return sum_value < sum_other;
             }
             else{
-                return value < other;
+                return value < other; //조건 3 : 사전 순
             }
         }
     }
