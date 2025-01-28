@@ -40,10 +40,8 @@ int main() {
     while(true) {
         T++;
         //cout << snake.size() << '\n';
-        int headY = snake.back().first;  
-        int headX = snake.back().second; 
-        int ny = headY + dy[i];
-        int nx = headX + dx[i];
+        ny = ny + dy[i];
+        nx = nx + dx[i];
         // cout << ny << " " << nx << '\n';
         if(ny < 0 || ny >= N || nx < 0 || nx >= N || arr[ny][nx] == 2) {
             // cout << ny << " " << nx << '\n';
