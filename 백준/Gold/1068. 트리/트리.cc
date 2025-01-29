@@ -11,24 +11,24 @@ int right_child[MAX_NODES];
 // 각 노드의 부모의 배열
 int parentArr[MAX_NODES];
 
-// 삭제된 노드 표시 배열
+// 삭제된 노드 표시 배열 -> dfs를 위해서
 bool deleted_nodes[MAX_NODES];
 
-// 루트 노드를 저장
+// 루트 노드 저장
 int root = -1;
 
 // 삭제 재귀 함수
 void delete_node(int node) {
     if (node == -1) return;
     
-    // 해당 노드를 삭제 표시
+    // 해당 노드를 삭제 표시(isvisited = true)
     deleted_nodes[node] = true;
     
-    // 자식 노드들도 재귀적으로 삭제
+    // 자식 노드들도 재귀적으로 삭제 -> dfs
     delete_node(left_child[node]);
     delete_node(right_child[node]);
     
-    // 부모 노드의 자식 포인터를 nullptr로 설정
+    // 부모 노드의 자식 값 -1 (없다는 뜻)
     int parent = parentArr[node];
     if (parent != -1) {
         if (left_child[parent] == node) {
@@ -41,14 +41,14 @@ void delete_node(int node) {
 }
 
 int main(){
-    ios::sync_with_stdio(false);
-    cin.tie(NULL);
+    ios::sync_with_stdio(0);
+    cin.tie(0);
     
     int N;
     cin >> N;
     
     // 초기화
-    for(int i=0; i<N; i++) {
+    for(int i=0; i < N; i++) {
         left_child[i] = -1;
         right_child[i] = -1;
         parentArr[i] = -1;
@@ -72,12 +72,12 @@ int main(){
         }
     }
     
-    int del;
+    int del; //삭제할 노드
     cin >> del;
     
-    // 삭제할 노드가 루트인 경우 처리
+    // 삭제할 노드가 루트 처리
     if(del == root){
-        // 모든 노드가 삭제되므로 리프 노드 개수는 0
+        // 모든 노드가 삭제
         cout << "0" << '\n';
         return 0;
     }
@@ -85,7 +85,7 @@ int main(){
     // 삭제할 노드와 그 자손을 삭제
     delete_node(del);
     
-    // 리프 노드 카운트
+    // 리프 노드 카운팅
     int leaf_count = 0;
     for(int i=0; i<N; i++) {
         if(!deleted_nodes[i]){
