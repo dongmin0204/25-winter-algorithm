@@ -2,49 +2,25 @@
 using namespace std;
 #define INF 999999
 
-// 유니온 파인드 Disjoint Set Union => 크루스칼에서 자주 활용 된다고 함
 struct DSU {
-    vector<int> parent; // parent[x]는 x의 부모 인덱스. 루트는 parent[root] == root
-    vector<int> rank;   // 트리의 한계 높이임 트리가 한쪽으로 치우치지 않게 균형 유지
-    
+    vector<int> parent;
 
     DSU(int n) {
         parent.resize(n);
-        rank.resize(n, 0);
-        for (int i = 0; i < n; i++) {
-            parent[i] = i; // 각자 독립 집합
-        }
-    } 
-    //n개의 원소가 각각 독립인 집합으로 시작, rank는 모두 0으로 시작(높이 0짜리 트리)
-    
+        for (int i = 0; i < n; i++) parent[i] = i;
+    }
 
     int find(int x) {
-        if (parent[x] == x) return x;
-        return parent[x] = find(parent[x]); // 경로 압축
+        return parent[x] == x ? x : parent[x] = find(parent[x]); // 경로 압축
     }
-    // 루트까지 재귀로 올라간 뒤, 지나온 노드들의 parent를 루트로 곧장 연결 (경로 압축이라 함)
-    // 이후 같은 원소에 대한 탐색이 매우 빨라짐(1의 시간복잡도)
-    // 사실상 캐쉬랑 마찬가지
 
     bool unite(int a, int b) {
-        a = find(a); 
-        b = find(b); //각자의 루트
-        
-        if (a == b) return false;//이미 같은 집합이면, 합칠 일 없음(사이클 감지에 유용)
-
-        if (rank[a] < rank[b]) {
-            swap(a, b);
-        } //a의 랭크가 항상 크거나 같게
-        
-        parent[b] = a;  //b 루트를 a 아래로 붙임
-        
-        if (rank[a] == rank[b]) {
-            rank[a]++;
-        } //랭크 같았으면 새 루트 높이 증가
-        return true;                      //실제로 합쳐졌음을 의미
+        a = find(a);
+        b = find(b);
+        if (a == b) return false; // 이미 같은 집합
+        parent[b] = a;            // 그냥 붙임 (rank 없이)
+        return true;
     }
-    // 작은 랭크 트리를 큰 랭크 트리 밑으로 붙여 트리 높이 증가를 최소화.
-    // 랭크가 같은 두 트리를 합칠 때만 새 루트의 랭크를 1 증가.
 };
 
 // n: 섬 개수, costs: [시작, 도착정점, 가주치]
